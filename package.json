@@ -1,0 +1,66 @@
+{
+  "name": "react-homework-template",
+  "version": "0.1.0",
+  "private": true,
+  "homepage": "https://Oseyijotham.github.io/pawsitory/",
+  "dependencies": {
+    "@craco/craco": "^7.1.0",
+    "@fancyapps/ui": "^5.0.36",
+    "@reduxjs/toolkit": "^1.6.2",
+    "@testing-library/jest-dom": "^5.16.3",
+    "@testing-library/react": "^12.1.4",
+    "@testing-library/user-event": "^13.5.0",
+    "@vimeo/player": "^2.23.0",
+    "assert": "^2.1.0",
+    "axios": "^1.7.2",
+    "bcryptjs": "^2.4.3",
+    "buffer": "^6.0.3",
+    "crypto": "^1.0.1",
+    "crypto-browserify": "^3.12.0",
+    "jose": "^5.9.6",
+    "notiflix": "^3.2.7",
+    "pexels": "^1.4.0",
+    "process": "^0.11.10",
+    "prop-types": "^15.8.1",
+    "react": "^17.0.2",
+    "react-app-rewired": "^2.2.1",
+    "react-dom": "^17.0.2",
+    "react-loader-spinner": "^6.1.6",
+    "react-redux": "^7.2.6",
+    "react-router-dom": "^6.22.3",
+    "react-scripts": "^5.0.1",
+    "react-spinners": "^0.13.8",
+    "redux-persist": "^6.0.0",
+    "simplelightbox": "^2.14.2",
+    "stream": "^0.0.3",
+    "stream-browserify": "^3.0.0",
+    "styled-components": "^6.1.8",
+    "theauthapi": "^1.0.1-2.1",
+    "web-vitals": "^2.1.3"
+  },
+  "scripts": {
+    "start": "craco start",
+    "build": "craco build",
+    "test": "craco test",
+    "eject": "react-scripts eject",
+    "lint:js": "eslint src/**/*.{js,jsx}"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
+}

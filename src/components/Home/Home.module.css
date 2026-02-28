@@ -1,0 +1,428 @@
+.cover{
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #87CEEB;
+  z-index: 2;
+  opacity: 1;
+  visibility: visible;
+  transition: opacity 1250ms cubic-bezier(0.4, 0, 0.2, 1), 
+              top 1250ms cubic-bezier(0.4, 0, 0.2, 1), 
+              visibility 1250ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.formContainer{
+  border-radius: 4px;
+  padding: 10px;
+  background-color: #4682B4;
+  background-color: #48bdeb;
+  border: 5px solid #fff;
+}
+.keyModalLabel{
+  font-family: 'Comic Sans MS';
+  color: blue;
+  font-weight: 700;
+}
+
+.keyModalButton{
+  padding: 10px;
+  background-color: blue;
+  border: none;
+  font-family: 'Comic Sans MS';
+  color: #87CEEB;
+  font-weight: 700;
+  border: 1px solid #fff;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.keyModalButton:hover{
+   background-color: #87CEEB; 
+   color: blue;
+   
+}
+
+.form {
+  width: 320px;
+  font-family: 'Comic Sans MS';
+  color: blue;
+  font-weight: 700;
+  text-align: center;
+  padding: 5px;
+}
+
+.input{
+    background-color: #87CEEB;
+    border-radius: 4px;
+    font-family: 'Comic Sans MS';
+    font-weight: 700;
+    padding: 3px;
+    color: blue;
+    margin-top: 3px;
+    border: 1px solid #fff;
+}
+
+.label {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 16px;
+  text-align: start;
+  color:blue;
+}
+
+
+.movieImage {
+  border-bottom: 3px solid #fff;
+  cursor: pointer;
+  display: block;
+  width: 100%;
+  height: 300px;
+}
+
+.movieGallery {
+  display: flex;
+  max-width: 1300px;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 30px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 20px;
+  padding: 20px;
+  background-color: #48bdeb;
+  border-radius: 4px;
+  box-shadow: 0 0.3em 1em #000;
+  border: 5px solid #fff;
+  
+}
+
+.movieItem {
+  background-color: rgba(255, 255, 255, 0.5);
+  border: 2px solid #fff;
+  color: #fff;
+  font-weight: 700;
+  border-radius: 4px;
+  font-family: 'Comic Sans MS';
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  transition-property: transform;
+  transition-duration: 250ms;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  background-size:cover;
+  box-shadow: inset 0 0 10px 5px rgba(0, 0, 0, 0.3);
+}
+
+.movieInfo {
+  display: block;
+  text-align: center;
+  text-decoration: none;
+  color: rgb(114, 17, 17);
+  width: 100%; 
+}
+
+.movieName{
+    display: flex;
+    padding: 10px;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.movieGalleryLabel {
+  align-items: center;
+  display: flex;
+  text-align: center;
+  justify-content: space-around;
+  padding: 8px;
+}
+
+.movieGalleryAnimation{
+  animation-name: spin;
+  animation-duration: 5s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.movieGalleryTitle{
+font-weight: 700;
+  font-size: 36px;
+  color: #fff;
+  font-family: 'Comic Sans MS';
+     text-shadow: 2px 2px 2px #000000;
+}
+
+.headerLabel{
+  font-weight: 700;
+  font-size: 18px;
+  color: #fff;
+  font-family: 'Comic Sans MS';
+     text-shadow: 2px 2px 2px #000000;
+}
+
+.headerWrapper{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap:10px
+}
+
+.genWrapper{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: #48bdeb;
+  border: 5px solid #fff;
+  padding: 10px;
+  border-radius: 20px;
+}
+
+.detailsModal{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #48bdeb;
+  border: 5px solid #fff;
+  padding: 10px;
+  border-radius: 4px;
+}
+
+.detailsModalText{
+  color: blue;
+  font-family: 'Comic Sans MS';
+  font-weight: 700;
+  padding: 10px;
+}
+
+.formDetailsContainer{
+  border-radius: 4px;
+  padding: 10px;
+  background-color: #4682B4;
+  background-color: #48bdeb;
+  border: 3px solid #fff;
+   box-shadow: 0px 4px 6px -1px rgba(0, 0, 0, 0.3),
+      0px 2px 4px -1px rgba(0, 0, 0, 0.2),
+      0px 10px 12px -6px rgba(0, 0, 0, 0.4);
+}
+
+.genLabel{
+    font-weight: 700;
+  font-size: 15px;
+  color: #fff;
+  font-family: 'Comic Sans MS';
+     text-shadow: 2px 2px 2px #000000;
+}
+
+.genCover{
+  display: flex;
+  gap: 10px;
+}
+
+.genButton{
+  background-color: blue;
+  cursor: pointer;
+  border-radius: 30px;
+  padding: 15px;
+  margin: 5px;
+  border: none;
+  color: #fff;
+  font-family: 'Comic Sans MS';
+  font-weight: 700;
+  box-shadow: 0px 4px 6px -1px rgba(0, 0, 0, 0.3),
+      0px 2px 4px -1px rgba(0, 0, 0, 0.2),
+      0px 10px 12px -6px rgba(0, 0, 0, 0.4);
+}
+
+
+
+.movieItem:hover {
+  transform: scale(1.03);
+  box-shadow: 0px 4px 6px -1px rgba(0, 0, 0, 0.3),
+    0px 2px 4px -1px rgba(0, 0, 0, 0.2), 0px 10px 12px -6px rgba(0, 0, 0, 0.4);
+}
+
+.galleryFrame{
+  position: relative;
+  max-width: 1300px;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+
+
+.movieItem:hover .catDescription,
+.movieItem:focus .catDescription {
+    transform: translateY(0%);
+}
+
+.liker{
+  margin: 5px;
+  padding:5px;
+  background-color: blue;
+  border: 1px solid rgba(15, 15, 15, 0.3);
+  font-weight: 700;
+  border-radius: 4px;
+  font-family: 'Comic Sans MS';
+  color: #fff;
+  border-radius: 30px;
+  cursor: pointer;
+}
+
+.buttonWrapper{
+  text-align: center;
+  margin: 10px;
+}
+
+.loadBtn{
+  background-color: blue;
+  box-shadow: 0px 4px 6px -1px rgba(0, 0, 0, 0.3),
+      0px 2px 4px -1px rgba(0, 0, 0, 0.2),
+      0px 10px 12px -6px rgba(0, 0, 0, 0.4);
+  border-radius: 4px;
+  cursor: pointer;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-left: 28px;
+  padding-right: 28px;
+  border: 1px solid rgba(15, 15, 15, 0.3);
+  font-family: 'Comic Sans MS';
+  font-weight: 700;
+  color:#ffff;
+}
+
+.overlay{
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.8);
+  z-index: 1;
+}
+
+.login{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.formContainer{
+  border-radius: 4px;
+  padding: 10px;
+  background-color: #4682B4;
+  background-color: #48bdeb;
+  border: 5px solid #fff;
+}
+
+.form {
+  width: 320px;
+  font-family: 'Comic Sans MS';
+  color: blue;
+  font-weight: 700;
+  text-align: center;
+  padding: 5px;
+}
+
+.input{
+    background-color: #87CEEB;
+    background-color: #fff;
+    border-radius: 4px;
+    font-family: 'Comic Sans MS';
+    font-weight: 700;
+    padding: 3px;
+    color: blue;
+    margin-top: 3px;
+    border: 1px solid #fff;
+}
+
+.label {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 16px;
+  text-align: start;
+  color:blue;
+}
+
+.inputButton{
+    background-color: blue;
+    border: none;
+    border-radius: 30px;
+    color: #87CEEB;
+    cursor: pointer;
+    font-family: Comic Sans Ms;
+    font-size: 18px;
+    font-weight: 700;
+    margin: 2px;
+    padding: 15px;
+    text-align: center;
+     box-shadow: 0px 4px 6px -1px rgba(0, 0, 0, 0.3),
+      0px 2px 4px -1px rgba(0, 0, 0, 0.2),
+      0px 10px 12px -6px rgba(0, 0, 0, 0.4);
+}
+
+.inputButton:hover{
+  background-color: #87CEEB;
+  color: blue;
+}
+
+.closeModal {
+  position: absolute;
+  top: 20px;
+  right: 120px;
+  border-radius: 50%;
+  cursor: pointer;
+  padding: 15px;
+  background-color: blue;
+  fill: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid #f1dbba;
+}
+
+.transactionHistory{
+    font-size: 16px;
+    font-weight: 700;
+    margin-left: 20px;
+    border-collapse: collapse;
+  text-align: center;
+  padding: 10px;
+  background-color: #87CEEB;
+  font-family: 'Comic Sans MS';
+  color: blue;
+  
+}
+
+ th,
+ td {
+  padding: 5px;
+  border: 3px solid #fff;
+}
+
+td {
+     background-color: #48bdeb;
+}
