@@ -659,7 +659,10 @@ export const saveVideos = createAsyncThunk(
          error.status = 401;
          throw error;
        }
-      await axios.post('/clientVideos', { video_files, owner: myClient.id });
+      await axios.post(
+        'https://69a708b02cd1d055268fad3b.mockapi.io/clientVideos',
+        { video_files, owner: myClient.id }
+      );
 
     } catch (e) {
       return thunkAPI.rejectWithValue(e.message);
@@ -672,7 +675,7 @@ export const deleteVideos = createAsyncThunk(
   async (vidId, thunkAPI) => {
     try {
       await axios.delete(
-        `https://69a6c3892cd1d055268ece6c.mockapi.io/users/${vidId}`
+        `https://69a708b02cd1d055268fad3b.mockapi.io/clientVideos/${vidId}`
       ); 
       return vidId; 
     } catch (e) {
@@ -858,7 +861,9 @@ export const fetchSavedVideos = createAsyncThunk(
         const error = new Error(`Not Authorized`);
         error.status = 401;
       }
-      const response = await axios.get('/clientVideos');
+      const response = await axios.get(
+        'https://69a708b02cd1d055268fad3b.mockapi.io/clientVideos'
+      );
       //console.log(response.data);
       const myData = response.data.filter(data => data.owner === myClient.id);
       //console.log(myData)

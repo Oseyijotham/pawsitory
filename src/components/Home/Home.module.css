@@ -336,7 +336,7 @@ font-weight: 700;
 .formContainer{
   border-radius: 4px;
   padding: 10px;
-  background-color: #48bdeb;
+  background-color: #d4af37;
   border: 5px solid #fff;
 }
 
@@ -350,7 +350,6 @@ font-weight: 700;
 }
 
 .input{
-    background-color: #87CEEB;
     background-color: #fff;
     border-radius: 4px;
     font-family: 'Comic Sans MS';
@@ -387,8 +386,7 @@ font-weight: 700;
 }
 
 .inputButton:hover{
-  background-color: #87CEEB;
-  color: blue;
+  background-color: #f2c94c;
 }
 
 .closeModal {
