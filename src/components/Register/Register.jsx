@@ -28,7 +28,7 @@ const handleSubmit = e => {
 };
 
     return (
-      <div className={css.login}>
+      <div className={css.register}>
         <div>
           <div className={css.formContainer}>
             <form

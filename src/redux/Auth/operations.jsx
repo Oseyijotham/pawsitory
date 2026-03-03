@@ -5,7 +5,7 @@ import bcrypt from 'bcryptjs';
 import { SignJWT } from 'jose';
 import { jwtVerify } from 'jose';
 
-axios.defaults.baseURL = 'https://66fef4ab2b9aac9c997debf1.mockapi.io/clients';
+//axios.defaults.baseURL = 'https://66fef4ab2b9aac9c997debf1.mockapi.io/clients';
 
 // Example function to sign JWT using jose
 export async function signJWT(payload, secretOrPrivateKey, options = {}) {
@@ -54,7 +54,9 @@ export const addUser = createAsyncThunk(
       //console.log(jwt);
       const secretKey = 'thisisaverysecurekey1234567890';
 
-      const users = await axios.get('/clientData');
+      const users = await axios.get(
+        'https://69a6c3892cd1d055268ece6c.mockapi.io/users'
+      );
       const clients = users.data;
 
 
@@ -71,7 +73,7 @@ export const addUser = createAsyncThunk(
         throw error;
       }
 
-      const response = await axios.post('/clientData', {
+      const response = await axios.post('https://69a6c3892cd1d055268ece6c.mockapi.io/users', {
         name,
         email:myMail,
         password: hashPassword,
@@ -95,7 +97,9 @@ export const logUserIn = createAsyncThunk(
   'auth/logUserIn',
   async ({ email, password }, thunkAPI) => {
     try {
-      const response = await axios.get('/clientData');
+      const response = await axios.get(
+        'https://69a6c3892cd1d055268ece6c.mockapi.io/users'
+      );
       //console.log(response.data);
       const secretKey = 'thisisaverysecurekey1234567890';
       
@@ -133,16 +137,19 @@ export const logUserIn = createAsyncThunk(
         throw error; 
       }
       const payload = {
-  id:myClient.id, // other data you want to include in the payload
-  exp: Math.floor(Date.now() / 1000) + (60 * 30), // Expires in 30 minutes
-};
+        id: myClient.id, // other data you want to include in the payload
+        exp: Math.floor(Date.now() / 1000) + 60 * 30, // Expires in 30 minutes
+      };
 
 const myToken = await signJWT(payload, secretKey, {
   algorithm: 'HS256',
 });
-      const update = await axios.put(`/clientData/${myClient.id}`, {
-        token: myToken
-      });
+      const update = await axios.put(
+        `https://69a6c3892cd1d055268ece6c.mockapi.io/users/${myClient.id}`,
+        {
+          token: myToken,
+        }
+      );
       //console.log(update.data);
       return update.data;
       
@@ -162,25 +169,25 @@ export const logUserOut = createAsyncThunk('auth/logUserOut', async (_, thunkAPI
   }
   
     try {
-      const response = await axios.get('/clientData');
+      const response = await axios.get(
+        'https://69a6c3892cd1d055268ece6c.mockapi.io/users'
+      );
       const clients = response.data;
       const secretKey = 'thisisaverysecurekey1234567890';
       //console.log(persistedToken);
       const payObj = await verifyJWT(persistedToken, secretKey);
       //console.log(payObj);
-      if (!payObj) {
-        alert('SESSION EXPIRED, LOGIN AGAIN');
-         const error = new Error(`Not Authorized`);
-         error.status = 401;
-       }
       const myClient = clients.find(client => client.id === payObj.id);
       if (!myClient) {
         const error = new Error(`Not Authorized`);
         error.status = 401;
       }
-     const update = await axios.put(`/clientData/${myClient.id}`, {
-       token: "",
-     });
+     const update = await axios.put(
+       `https://69a6c3892cd1d055268ece6c.mockapi.io/users/${myClient.id}`,
+       {
+         token: '',
+       }
+     );
       //console.log(update.data);
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
@@ -201,12 +208,14 @@ export const refreshUser = createAsyncThunk(
     }
 
     try {
-      const response = await axios.get('/clientData');
+      const response = await axios.get(
+        'https://69a6c3892cd1d055268ece6c.mockapi.io/users'
+      );
       const clients = response.data;
       const secretKey = 'thisisaverysecurekey1234567890';
       //console.log(persistedToken);
       const payObj = await verifyJWT(persistedToken, secretKey);
-      //console.log(payObj);
+      console.log(payObj);
       if (!payObj) {
         //alert('SESSION EXPIRED, LOGIN AGAIN');
         const error = new Error(`Not Authorized`);

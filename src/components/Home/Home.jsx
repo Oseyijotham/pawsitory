@@ -31,6 +31,7 @@ import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
 import { useState } from 'react';
 import svg from '../SharedLayout/icons.svg';
+import dog from './dog.png'
 
 export const Home = () => {
   const dispatch = useDispatch();
@@ -151,14 +152,14 @@ export const Home = () => {
       <FullLoader />
       <span className={css.movieGalleryLabel}>
         <img
-          src={play}
-          alt="Play"
+          src={dog}
+          alt="Dog"
           width="100"
           className={css.movieGalleryAnimation}
         />
         <div className={css.headerWrapper}>
           <span className={css.headerLabel}>Hello, {userName.name}</span>
-          <span className={css.movieGalleryTitle}>Trending Videos</span>
+          <span className={css.movieGalleryTitle}>Videos</span>
           {myKey === null && (
             <span className={css.genWrapper}>
               <span className={css.genLabel}>For more access</span>
@@ -338,8 +339,8 @@ export const Home = () => {
           )}
         </div>
         <img
-          src={play}
-          alt="Play"
+          src={dog}
+          alt="Dog"
           width="100"
           className={css.movieGalleryAnimation}
         />

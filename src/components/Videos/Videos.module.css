@@ -26,7 +26,7 @@
   margin-right: auto;
   margin-bottom: 20px;
   padding: 20px;
-  background-color: #48bdeb;
+  background-color: #d4af37;
   border-radius: 4px;
   box-shadow: 0 0.3em 1em #000;
   border: 5px solid #fff;
@@ -51,7 +51,7 @@
 .liker{
   margin: 5px;
   padding:5px;
-  background-color: blue;
+  background-color: #A6121F;
   border: 1px solid rgba(15, 15, 15, 0.3);
   font-weight: 700;
   border-radius: 4px;
@@ -191,7 +191,7 @@
 }
 
 .loadBtn{
-  background-color: blue;
+  background-color: #d4af37;
   box-shadow: 0px 4px 6px -1px rgba(0, 0, 0, 0.3),
       0px 2px 4px -1px rgba(0, 0, 0, 0.2),
       0px 10px 12px -6px rgba(0, 0, 0, 0.4);

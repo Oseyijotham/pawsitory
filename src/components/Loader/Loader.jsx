@@ -16,7 +16,7 @@ export const FullLoader = () => {
             visible={true}
             height="80"
             width="80"
-            color="blue"
+            color="#d4af37"
             radius="9"
             ariaLabel="three-dots-loading"
             wrapperStyle={{}}

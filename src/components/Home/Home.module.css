@@ -95,7 +95,7 @@
   margin-right: auto;
   margin-bottom: 20px;
   padding: 20px;
-  background-color: #48bdeb;
+  background-color: #d4af37;
   border-radius: 4px;
   box-shadow: 0 0.3em 1em #000;
   border: 5px solid #fff;
@@ -145,19 +145,23 @@
 }
 
 .movieGalleryAnimation{
-  animation-name: spin;
+  animation-name: scale;
   animation-duration: 5s;
   animation-timing-function: linear;
   animation-iteration-count: infinite;
 }
 
-@keyframes spin {
+@keyframes scale {
   0% {
-    transform: rotate(0deg);
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.5);
   }
 
   100% {
-    transform: rotate(360deg);
+    transform: scale(1);
   }
 }
 
@@ -190,7 +194,7 @@ font-weight: 700;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background-color: #48bdeb;
+  background-color: #d4af37;
   border: 5px solid #fff;
   padding: 10px;
   border-radius: 20px;
@@ -200,14 +204,14 @@ font-weight: 700;
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: #48bdeb;
+  background-color: #d4af37;
   border: 5px solid #fff;
   padding: 10px;
   border-radius: 4px;
 }
 
 .detailsModalText{
-  color: blue;
+  color: #fff;
   font-family: 'Comic Sans MS';
   font-weight: 700;
   padding: 10px;
@@ -216,8 +220,7 @@ font-weight: 700;
 .formDetailsContainer{
   border-radius: 4px;
   padding: 10px;
-  background-color: #4682B4;
-  background-color: #48bdeb;
+  background-color: #d4af37;
   border: 3px solid #fff;
    box-shadow: 0px 4px 6px -1px rgba(0, 0, 0, 0.3),
       0px 2px 4px -1px rgba(0, 0, 0, 0.2),
@@ -238,7 +241,7 @@ font-weight: 700;
 }
 
 .genButton{
-  background-color: blue;
+  background-color: #A6121F;
   cursor: pointer;
   border-radius: 30px;
   padding: 15px;
@@ -277,7 +280,7 @@ font-weight: 700;
 .liker{
   margin: 5px;
   padding:5px;
-  background-color: blue;
+  background-color: #A6121F;
   border: 1px solid rgba(15, 15, 15, 0.3);
   font-weight: 700;
   border-radius: 4px;
@@ -293,7 +296,7 @@ font-weight: 700;
 }
 
 .loadBtn{
-  background-color: blue;
+  background-color: #d4af37;
   box-shadow: 0px 4px 6px -1px rgba(0, 0, 0, 0.3),
       0px 2px 4px -1px rgba(0, 0, 0, 0.2),
       0px 10px 12px -6px rgba(0, 0, 0, 0.4);
@@ -333,7 +336,6 @@ font-weight: 700;
 .formContainer{
   border-radius: 4px;
   padding: 10px;
-  background-color: #4682B4;
   background-color: #48bdeb;
   border: 5px solid #fff;
 }
@@ -341,7 +343,7 @@ font-weight: 700;
 .form {
   width: 320px;
   font-family: 'Comic Sans MS';
-  color: blue;
+  color: #fff;
   font-weight: 700;
   text-align: center;
   padding: 5px;
@@ -354,7 +356,7 @@ font-weight: 700;
     font-family: 'Comic Sans MS';
     font-weight: 700;
     padding: 3px;
-    color: blue;
+    color: #A6121F;
     margin-top: 3px;
     border: 1px solid #fff;
 }
@@ -364,14 +366,14 @@ font-weight: 700;
   flex-direction: column;
   margin-bottom: 16px;
   text-align: start;
-  color:blue;
+  color:#fff;
 }
 
 .inputButton{
-    background-color: blue;
+    background-color: #A6121F;
     border: none;
     border-radius: 30px;
-    color: #87CEEB;
+    color: #ffff;
     cursor: pointer;
     font-family: Comic Sans Ms;
     font-size: 18px;
@@ -396,7 +398,7 @@ font-weight: 700;
   border-radius: 50%;
   cursor: pointer;
   padding: 15px;
-  background-color: blue;
+  background-color: #d4af37;
   fill: #fff;
   display: flex;
   align-items: center;
@@ -411,9 +413,9 @@ font-weight: 700;
     border-collapse: collapse;
   text-align: center;
   padding: 10px;
-  background-color: #87CEEB;
+  background-color: #d4af37;
   font-family: 'Comic Sans MS';
-  color: blue;
+  color: #A6121F;
   
 }
 
@@ -424,5 +426,5 @@ font-weight: 700;
 }
 
 td {
-     background-color: #48bdeb;
+     background-color: #d4af37;
 }

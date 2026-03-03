@@ -1,4 +1,4 @@
-.login{
+.register{
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -9,50 +9,26 @@
 .formContainer{
   border-radius: 4px;
   padding: 10px;
-  background-color: #4682B4;
-  background-color: #48bdeb;
+  background-color: #d4af37;
   border: 5px solid #fff;
-}
-.keyModalLabel{
-  font-family: 'Comic Sans MS';
-  color: blue;
-  font-weight: 700;
-}
-
-.keyModalButton{
-  padding: 10px;
-  background-color: blue;
-  border: none;
-  font-family: 'Comic Sans MS';
-  color: #87CEEB;
-  font-weight: 700;
-  border: 1px solid #fff;
-  border-radius: 4px;
-  cursor: pointer;
-}
-
-.keyModalButton:hover{
-   background-color: #87CEEB; 
-   color: blue;
-   
 }
 
 .form {
   width: 320px;
   font-family: 'Comic Sans MS';
-  color: blue;
+  color: #fff;
   font-weight: 700;
   text-align: center;
   padding: 5px;
 }
 
 .input{
-    background-color: #87CEEB;
+    background-color: #ffff;
     border-radius: 4px;
     font-family: 'Comic Sans MS';
     font-weight: 700;
     padding: 3px;
-    color: blue;
+    color: #A6121F;
     margin-top: 3px;
     border: 1px solid #fff;
 }
@@ -62,14 +38,14 @@
   flex-direction: column;
   margin-bottom: 16px;
   text-align: start;
-  color:blue;
+  color:#ffff;
 }
 
 .inputButton{
-    background-color: blue;
+    background-color: #A6121F;
     border: none;
     border-radius: 4px;
-    color: #87CEEB;
+    color: #ffff;
     cursor: pointer;
     font-family: Comic Sans Ms;
     font-size: 18px;
@@ -84,13 +60,5 @@
 }
 
 .inputButton:hover{
-  background-color: #87CEEB;
-  color: blue;
-}
-
-.inputText{
-    color: blue;
-    display: block;
-    margin-bottom: 10px;
-    margin-top: 1px;
+  background-color: #f2c94c;
 }

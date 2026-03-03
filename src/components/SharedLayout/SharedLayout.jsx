@@ -17,6 +17,7 @@ import { useSelector } from 'react-redux';
 import { selectIfLoggedIn } from '../../redux/Auth/selectors';
 import { Loader } from '../AuthLoader/Loader';
 import { useNavigate } from 'react-router-dom';
+import logo from './logo.png'
 //import { useEffect } from 'react';
 //import { selectVotes } from '../../redux/Application/selectors';
 //import { useSelector } from 'react-redux';
@@ -44,13 +45,9 @@ export const SharedLayout = () => {
         <Symbol to="/">
           <Logo>
             <Frame role="img" aria-label="computer icon">
-              <img
-                src="https://cdn-icons-png.flaticon.com/512/616/616438.png"
-                alt="Eye"
-                width="50px"
-              />
+              <img src={logo} alt="Eye" width="50px" />
             </Frame>
-            <IconLabel>Visualize</IconLabel>
+            <IconLabel>Pawsitory</IconLabel>
           </Logo>
         </Symbol>
         {ifLoggedIn && (
@@ -66,7 +63,7 @@ export const SharedLayout = () => {
             </nav>
             <span className={css.navSlogan}>
               <i>
-                "Create Your Personal Collection from the World’s Best Visuals"
+                "Create Your Personal Collection of quality Dog Media"
               </i>
             </span>
           </div>
@@ -77,14 +74,9 @@ export const SharedLayout = () => {
           </button>
         )}
         {ifLoggedIn === false && (
-          
-            <Linker
-              className={css.button}
-              onClick={handleButtonPress}
-            >
-              Register
-            </Linker>
-          
+          <Linker className={css.button} onClick={handleButtonPress}>
+            Register
+          </Linker>
         )}
       </Header>
       <main className={css.home}>

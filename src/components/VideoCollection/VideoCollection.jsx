@@ -3,7 +3,7 @@ import { Fancybox } from '@fancyapps/ui';
 import '@fancyapps/ui/dist/fancybox/fancybox.css';
 import { useEffect } from 'react';
 import { Loader } from '../InitLoader/Loader';
-import videoFolder from './video-folder.png'
+import vid from './vid.png'
 import { useDispatch } from 'react-redux';
 import {
   fetchSavedVideos,
@@ -46,7 +46,7 @@ export const VideoCollection = () => {
     <main>
       <span className={css.titleContainer}>
         <img
-          src={videoFolder}
+          src={vid}
           className={css.icon}
           style={{ width: '100px' }}
           alt=""
@@ -57,7 +57,7 @@ export const VideoCollection = () => {
         </span>
 
         <img
-          src={videoFolder}
+          src={vid}
           className={css.iconTwo}
           style={{ width: '100px' }}
           alt=""

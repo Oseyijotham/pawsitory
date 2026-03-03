@@ -2,7 +2,7 @@ import css from './PictureCollection.module.css';
 import { Loader } from '../InitLoader/Loader';
 import { useEffect } from 'react';
 //import { Button } from '../PetScopeButton/Button';
-import imagePic from './upload.png';
+import imagePic from './photo.png';
 import SimpleLightbox from 'simplelightbox';
 import 'simplelightbox/dist/simple-lightbox.min.css';
 import { useDispatch } from 'react-redux';
@@ -72,21 +72,21 @@ export const PictureCollection = () => {
         {savedImages.length !== 0 ? (
           <ul className={`${css.movieGallery} gallery`}>
             {savedImages.map(savedImage => (
-              <li key={savedImage.image_files.id} className={css.movieItem}>
-                <a href={savedImage.image_files.src.landscape}>
+              <li key={savedImage.id} className={css.movieItem}>
+                <a href={savedImage.image_files.url}>
                   <img
                     className={css.image}
-                    src={savedImage.image_files.src.medium}
-                    alt={savedImage.image_files.alt}
+                    src={savedImage.image_files.url}
+                    alt={savedImage.id}
                   />
                 </a>
                 <button
                   className={css.liker}
-                  name={savedImage.id}
-                  onClick={handlePress}
+                  onClick={evt => handlePress(savedImage, evt)}
                 >
-                  Delete
+                  Save
                 </button>
+                {console.log(savedImage)}
               </li>
             ))}
           </ul>

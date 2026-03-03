@@ -82,7 +82,9 @@ export const createKey = createAsyncThunk(
       return thunkAPI.rejectWithValue('Unable to fetch user');
     }
     try {
-      const res = await axios.get('/clientData');
+      const res = await axios.get(
+        'https://69a6c3892cd1d055268ece6c.mockapi.io/users'
+      );
       const clients = res.data;
 
       const secretKey = 'thisisaverysecurekey1234567890';
@@ -118,14 +120,17 @@ export const createKey = createAsyncThunk(
       });
 
       //console.log('Key created > ', key);
-       await axios.put(`/clientData/${myClient.id}`, {
-         ...myClient,
-         apiKey: myToken,
-         apiKeyName: key.name,
-         apiAccountId: key.customAccountId,
-         apiCreationDate: key.createdAt,
-         apiMetaData: key.customMetaData.metadata_val
-       });
+       await axios.put(
+         `https://69a6c3892cd1d055268ece6c.mockapi.io/users/${myClient.id}`,
+         {
+           ...myClient,
+           apiKey: myToken,
+           apiKeyName: key.name,
+           apiAccountId: key.customAccountId,
+           apiCreationDate: key.createdAt,
+           apiMetaData: key.customMetaData.metadata_val,
+         }
+       );
       //console.log(key)
       return key;
     } catch (e) {
@@ -144,7 +149,9 @@ export const updateKey = createAsyncThunk(
       return thunkAPI.rejectWithValue('Unable to fetch user');
     }
     try {
-      const res = await axios.get('/clientData');
+      const res = await axios.get(
+        'https://69a6c3892cd1d055268ece6c.mockapi.io/users'
+      );
       const clients = res.data;
 
       const secretKey = 'thisisaverysecurekey1234567890';
@@ -184,15 +191,18 @@ export const updateKey = createAsyncThunk(
 
       
       //console.log('Key created > ', key);
-      await axios.put(`/clientData/${myClient.id}`, {
-        ...myClient,
-        apiKey: myToken,
-        apiKeyName: key.name,
-        apiAccountId: key.customAccountId,
-        apiCreationDate: key.createdAt,
-        apiMetaData: key.customMetaData.metadata_val,
-        //apiMetaData:key
-      });
+      await axios.put(
+        `https://69a6c3892cd1d055268ece6c.mockapi.io/users/${myClient.id}`,
+        {
+          ...myClient,
+          apiKey: myToken,
+          apiKeyName: key.name,
+          apiAccountId: key.customAccountId,
+          apiCreationDate: key.createdAt,
+          apiMetaData: key.customMetaData.metadata_val,
+          //apiMetaData:key
+        }
+      );
       //console.log(key)
       return key;
     } catch (e) {
@@ -213,7 +223,9 @@ export const deleteKey = createAsyncThunk(
       return thunkAPI.rejectWithValue('Unable to fetch user');
     }
     try {
-      const res = await axios.get('/clientData');
+      const res = await axios.get(
+        'https://69a6c3892cd1d055268ece6c.mockapi.io/users'
+      );
       const clients = res.data;
 
        const secretKey = 'thisisaverysecurekey1234567890';
@@ -241,14 +253,17 @@ export const deleteKey = createAsyncThunk(
       alert('KEY DELETED');
       
       //console.log('Key created > ', key);
-      await axios.put(`/clientData/${myClient.id}`, {
-        ...myClient,
-        apiKey: null,
-        apiKeyName: null,
-        apiAccountId: null,
-        apiCreationDate: null,
-        apiMetaData:null
-      });
+      await axios.put(
+        `https://69a6c3892cd1d055268ece6c.mockapi.io/users/${myClient.id}`,
+        {
+          ...myClient,
+          apiKey: null,
+          apiKeyName: null,
+          apiAccountId: null,
+          apiCreationDate: null,
+          apiMetaData: null,
+        }
+      );
       return key;
     } catch (e) {
       console.log("Couldn't make the key ", e);
@@ -268,7 +283,7 @@ export const retrieveKey = createAsyncThunk(
     }
 
     try {
-      const res = await axios.get('/clientData');
+      const res = await axios.get('https://69a6c3892cd1d055268ece6c.mockapi.io/users');
       const clients = res.data;
 
       const myClient = clients.find(client => client.token === persistedToken);
@@ -298,10 +313,10 @@ export const retrieveKey = createAsyncThunk(
 
 export const fetchPopularVideos = createAsyncThunk(
   'videos/fetchPopularVideos',
-  async (_, thunkAPI) => {
+  async (query = 'Canine', thunkAPI) => {
     try {
-      const response = await client.videos.popular({ per_page: 12 });
-     // console.log(response.videos);
+      const response = await client.videos.search({ query, per_page: 12 });
+      // console.log(response.videos);
       return response.videos;
     } catch (e) {
       return thunkAPI.rejectWithValue(e.message);
@@ -311,15 +326,17 @@ export const fetchPopularVideos = createAsyncThunk(
 
 export const fetchMorePopularVideos = createAsyncThunk(
   'videos/fetchMorePopularVideos',
-  async (_, thunkAPI) => {
+  async (query = 'Canine', thunkAPI) => {
     const state = thunkAPI.getState();
 
     const popularVidNmu = state.app.popularVidNmu;
 
-
     const moreVids = popularVidNmu + 12;
     try {
-      const response = await client.videos.popular({ per_page: moreVids });
+      const response = await client.videos.search({
+        query,
+        per_page: moreVids,
+      });
       //console.log(response.videos);
       return response.videos;
     } catch (e) {
@@ -386,12 +403,11 @@ export const searchVideos = createAsyncThunk(
 
 export const searchMoreVideos = createAsyncThunk(
   'videos/searchMoreVideos',
-  async (query, thunkAPI) => {
+  async (query = 'Canine', thunkAPI) => {
     const state = thunkAPI.getState();
     const persistedToken = state.auth.token;
 
     const searchVidNmu = state.app.searchVidNmu;
-    
 
     const moreVids = searchVidNmu + 12;
 
@@ -402,21 +418,21 @@ export const searchMoreVideos = createAsyncThunk(
     try {
       const res = await axios.get('/clientData');
       const clients = res.data;
-        const secretKey = 'thisisaverysecurekey1234567890';
-        //console.log(persistedToken);
-        const payObj = await verifyJWT(persistedToken, secretKey);
-        //console.log(payObj);
-        if (!payObj) {
-          alert('SESSION EXPIRED, LOGIN AGAIN');
-          window.location.reload();
-          const error = new Error(`Not Authorized`);
-          error.status = 401;
-        }
-        const myClient = clients.find(client => client.id === payObj.id);
-        if (!myClient) {
-          const error = new Error(`Not Authorized`);
-          error.status = 401;
-        }
+      const secretKey = 'thisisaverysecurekey1234567890';
+      //console.log(persistedToken);
+      const payObj = await verifyJWT(persistedToken, secretKey);
+      //console.log(payObj);
+      if (!payObj) {
+        alert('SESSION EXPIRED, LOGIN AGAIN');
+        window.location.reload();
+        const error = new Error(`Not Authorized`);
+        error.status = 401;
+      }
+      const myClient = clients.find(client => client.id === payObj.id);
+      if (!myClient) {
+        const error = new Error(`Not Authorized`);
+        error.status = 401;
+      }
       //
       const response = await client.videos.search({
         query,
@@ -442,9 +458,20 @@ export const fetchPopularImages = createAsyncThunk(
   'videos/fetchPopularImages',
   async (_, thunkAPI) => {
     try {
-      const response = await client.photos.curated({ per_page: 12 });
-      //console.log(response);
-      return response;
+      const response = await fetch(
+        'https://api.thedogapi.com/v1/images/search?limit=10',
+        {
+          method: 'GET',
+          headers: {
+            'x-api-key':
+              'live_mVNNir4rmmFjnXsK0BwEkL9zWunBd4QBbdqWnb3nql70CmvWgJCGr5zp2xeeLlRD',
+          },
+        }
+      );
+      
+      const data = await response.json();
+      console.log(data);
+      return data;
     } catch (e) {
       return thunkAPI.rejectWithValue(e.message);
     }
@@ -458,11 +485,22 @@ export const fetchMorePopularImages = createAsyncThunk(
 
     const popularImgNmu = state.app.popularImgNmu;
 
-    const moreImgs = popularImgNmu + 12;
+    const moreImgs = popularImgNmu + 10;
     try {
-      const response = await client.photos.curated({ per_page: moreImgs });
-      //console.log(response);
-      return response;
+      const response = await fetch(
+        `https://api.thedogapi.com/v1/images/search?limit=${moreImgs}`,
+        {
+          method: 'GET',
+          headers: {
+            'x-api-key':
+              'live_mVNNir4rmmFjnXsK0BwEkL9zWunBd4QBbdqWnb3nql70CmvWgJCGr5zp2xeeLlRD',
+          },
+        }
+      );
+
+      const data = await response.json();
+      console.log(data);
+      return data;
     } catch (e) {
       return thunkAPI.rejectWithValue(e.message);
     }
@@ -582,7 +620,9 @@ export const saveVideos = createAsyncThunk(
     }
     
     try {
-      const res = await axios.get('/clientData');
+      const res = await axios.get(
+        'https://69a6c3892cd1d055268ece6c.mockapi.io/users'
+      );
       const clients = res.data;
      const secretKey = 'thisisaverysecurekey1234567890';
      //console.log(persistedToken);
@@ -631,7 +671,9 @@ export const deleteVideos = createAsyncThunk(
   'videos/deleteVideos', 
   async (vidId, thunkAPI) => {
     try {
-      await axios.delete(`/clientVideos/${vidId}`); 
+      await axios.delete(
+        `https://69a6c3892cd1d055268ece6c.mockapi.io/users/${vidId}`
+      ); 
       return vidId; 
     } catch (e) {
       return thunkAPI.rejectWithValue(e.message);
@@ -650,7 +692,7 @@ export const saveImages = createAsyncThunk(
         return thunkAPI.rejectWithValue('Unable to fetch user');
       }
     try {
-      const res = await axios.get('/clientData');
+      const res = await axios.get('https://69a6c3892cd1d055268ece6c.mockapi.io/users');
       const clients = res.data;
       const secretKey = 'thisisaverysecurekey1234567890';
       //console.log(persistedToken);
@@ -688,7 +730,7 @@ export const saveImages = createAsyncThunk(
        }
 
       const response = await fetch(
-        `https://6656017a3c1d3b60293beb10.mockapi.io/clientImages`,
+        `https://69a6c3892cd1d055268ece6c.mockapi.io/clientImages`,
         {
           method: 'POST',
           headers: {
@@ -722,7 +764,9 @@ export const fetchSavedImages = createAsyncThunk(
        return thunkAPI.rejectWithValue('Unable to fetch user');
      }
     try {
-       const res = await axios.get('/clientData');
+       const res = await axios.get(
+         'https://69a6c3892cd1d055268ece6c.mockapi.io/users'
+       );
        const clients = res.data;
       const secretKey = 'thisisaverysecurekey1234567890';
       //console.log(persistedToken);
@@ -741,7 +785,7 @@ export const fetchSavedImages = createAsyncThunk(
       }
 
       const response = await fetch(
-        `https://6656017a3c1d3b60293beb10.mockapi.io/clientImages`
+        `https://69a6c3892cd1d055268ece6c.mockapi.io/clientImages`
       );
 
       
@@ -766,7 +810,7 @@ export const deleteImages = createAsyncThunk(
     //console.log(myId);
     try {
       const response = await fetch(
-        `https://6656017a3c1d3b60293beb10.mockapi.io/clientImages/${myId}`,
+        `https://69a6c3892cd1d055268ece6c.mockapi.io/clientImages/${myId}`,
         {
           method: 'DELETE',
         }
@@ -795,7 +839,9 @@ export const fetchSavedVideos = createAsyncThunk(
     }
 
     try {
-      const res = await axios.get('/clientData');
+      const res = await axios.get(
+        'https://69a6c3892cd1d055268ece6c.mockapi.io/users'
+      );
       const clients = res.data;
       const secretKey = 'thisisaverysecurekey1234567890';
       //console.log(persistedToken);

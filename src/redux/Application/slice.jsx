@@ -9,7 +9,7 @@ import {
   searchVideos,
   fetchVidWord,
   fetchPopularImages,
-  //fetchMorePopularImages,
+  fetchMorePopularImages,
   searchMoreImages,
   searchImages,
   fetchImgWord,
@@ -147,10 +147,24 @@ const appSlice = createSlice({
       .addCase(fetchPopularImages.fulfilled, (state, action) => {
         state.ifLoading = false;
         state.error = null;
-        state.popularImages = action.payload.photos;
+        state.popularImages = action.payload;
         state.popularImgNmu = state.popularImages.length;
       })
       .addCase(fetchPopularImages.rejected, (state, action) => {
+        state.ifLoading = false;
+        state.error = action.payload;
+      })
+
+      .addCase(fetchMorePopularImages.pending, state => {
+        state.ifLoading = true;
+      })
+      .addCase(fetchMorePopularImages.fulfilled, (state, action) => {
+        state.ifLoading = false;
+        state.error = null;
+        state.popularImages = action.payload;
+        state.popularImgNmu = state.popularImages.length;
+      })
+      .addCase(fetchMorePopularImages.rejected, (state, action) => {
         state.ifLoading = false;
         state.error = action.payload;
       })

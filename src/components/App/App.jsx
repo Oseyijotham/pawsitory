@@ -6,16 +6,15 @@ import { AuthRegisterRoute } from '../AuthRegisterRoute/AuthRegisterRoute';
 import { SecureRoute } from '../SecureRoute/SecureRoute';
 import { useDispatch } from 'react-redux';
 import { useEffect } from 'react';
-import { refreshUser } from '../../redux/Auth/operations';
+import { refreshUser, logUserOut } from '../../redux/Auth/operations';
 import { useSelector } from 'react-redux';
-import { selectIfRefreshing } from '../../redux/Auth/selectors';
+import { selectIfRefreshing, selectToken } from '../../redux/Auth/selectors';
 import {
   fetchPopularVideos,
   fetchPopularImages,
-  fetchSavedVideos,
-  fetchSavedImages,
   retrieveKey,
 } from '../../redux/Application/operations';
+import { jwtVerify } from 'jose';
 
 const Home = lazy(() => import('../Home/Home'));
 const Login = lazy(() => import('../Login/Login'));
@@ -31,13 +30,68 @@ const Videos = lazy(() => import('../Videos/Videos'));
 
 export const App = () => {
   const ifRefreshing = useSelector(selectIfRefreshing);
+  const token = useSelector(selectToken);
   const dispatch = useDispatch();
+
+async function verifyJWT(token, secretOrPrivateKey, algorithm = 'HS256') {
+  // Convert the secret key into a Buffer
+  const secretKey = Buffer.from(secretOrPrivateKey);
+
+  try {
+    // Verify the token using the secret key
+    const { payload, protectedHeader } = await jwtVerify(token, secretKey, {
+      algorithms: [algorithm]
+    });
+
+
+    return payload; // Return the decoded payload if verification is successful
+  } catch (error) {
+    console.error('JWT verification failed:', error.message);
+    return null;
+  }
+}
+
+
+  useEffect(() => {
+    const secretKey = 'thisisaverysecurekey1234567890';
+    if (!token) return;
+
+    let interval;
+
+    const runVerification = async () => {
+      const decoded = await verifyJWT(token, secretKey);
+
+      if (!decoded) {
+        dispatch(logUserOut());
+        return;
+      }
+
+      const { exp } = decoded;
+
+      const checkExpiry = () => {
+        const currentTime = Math.floor(Date.now() / 1000);
+
+        if (exp - currentTime <= 120) {
+          alert('Session timeout');
+          dispatch(logUserOut());
+          clearInterval(interval);
+        }
+      };
+
+      checkExpiry();
+      interval = setInterval(checkExpiry, 1000);
+    };
+
+    runVerification();
+
+    return () => clearInterval(interval);
+  }, [token, dispatch]);
+
+
   useEffect(() => {
     dispatch(refreshUser());
     dispatch(fetchPopularVideos());
     dispatch(fetchPopularImages());
-    //dispatch(fetchSavedVideos());
-    //dispatch(fetchSavedImages());
     dispatch(retrieveKey());
   }, [dispatch]);
 

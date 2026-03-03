@@ -3,9 +3,9 @@
   height: 70px;
   border-radius: 50%;
   text-decoration: none;
-  color: blue;
+  color: #fff;
   font-weight: 700;
-  background-color: #87ceeb;
+  background-color: #a6121f;
   border: 2px solid #fff;
   font-family: Comic Sans MS;
   display: flex;
@@ -14,11 +14,12 @@
   cursor: pointer;
   margin-right: 10px;
   font-size:15px;
+  box-shadow: inset 0 0 10px 5px rgba(0, 0, 0, 1);
 }
 
  .button:hover {
     color: white;
-    background-color: blue;
+    background-color: #f2c94c;
   }
 
 .navWrapper{
@@ -34,4 +35,5 @@
   margin: 10px;
   font-size: 18px;
   font-weight: 700;
+  text-shadow: 2px 2px 2px #000000;
 }

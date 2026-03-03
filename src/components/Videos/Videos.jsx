@@ -13,10 +13,8 @@ import {
   selectPopularVideos,
 } from '../../redux/Application/selectors';
 import {
-  searchVideos,
-  fetchVidWord,
   saveVideos,
-  searchMoreVideos
+  fetchMorePopularVideos,
 } from '../../redux/Application/operations';
 
 export const Videos = () => {
@@ -26,25 +24,13 @@ export const Videos = () => {
   const ifLoading = useSelector(selectLoading);
   const popularVideos = useSelector(selectPopularVideos);
 
-  const handleSubmit = (evt) => {
-    evt.preventDefault();
-     evt.target.elements.button.style.boxShadow =
-       'inset 0 0 10px 5px rgba(0, 0, 0, 0.3)';
-     setTimeout(() => {
-       evt.target.elements.button.style.boxShadow = 'none';
-     }, 2000);
-    const form = evt.target;
-    dispatch(searchVideos(form.elements.searcher.value))
-    dispatch(fetchVidWord(form.elements.searcher.value));
-  }
-
   const handleButtonPress = (evt) => {
      evt.target.style.boxShadow = 'inset 0 0 10px 5px rgba(0, 0, 0, 0.3)';
 
      setTimeout(() => {
        evt.target.style.boxShadow = 'none';
      }, 2000);
-    dispatch(searchMoreVideos(searchedVidWord));
+    dispatch(fetchMorePopularVideos());
   }
 
  const handlePress = (videoFiles, evt) => {
@@ -91,48 +77,10 @@ export const Videos = () => {
           alt=""
         />
       </span>
-      <form className={css.form} onSubmit={handleSubmit}>
-        <input
-          className={css.input}
-          type="text"
-          autoComplete="off"
-          name="searcher"
-          placeholder="Search for Videos"
-        />
-        <button type="submit" name="button" className={css.button}>
-          <span className={css.buttonLabel}>Search</span>
-        </button>
-      </form>
+
       <div className={css.galleryFrame}>
         <Loader />
-        {searchedVideos.length !== 0 && searchedVidWord !== null ? (
-          <ul className={`${css.movieGallery} gallery`}>
-            {searchedVideos.map(searchedVideo => (
-              <li
-                key={searchedVideo.video_files[2].id}
-                className={css.movieItem}
-              >
-                <a
-                  href={searchedVideo.video_files[0].link}
-                  data-fancybox="gallery"
-                >
-                  <video
-                    className={css.movieImage}
-                    src={searchedVideo.video_files[2].link}
-                    controls
-                  ></video>
-                </a>
-                <button
-                  className={css.liker}
-                  data-id1={searchedVideo.video_files}
-                  onClick={evt => handlePress(searchedVideo.video_files, evt)}
-                >
-                  Save
-                </button>
-              </li>
-            ))}
-          </ul>
-        ) : searchedVideos.length === 0 && searchedVidWord === null ? (
+        {popularVideos.length !== 0 && (
           <ul className={`${css.movieGallery} gallery`}>
             {popularVideos.map(popularVideo => (
               <li
@@ -159,19 +107,10 @@ export const Videos = () => {
               </li>
             ))}
           </ul>
-        ) : (
-          searchedVidWord !== null &&
-          ifLoading === false && (
-            <div className={css.message}>
-              <p className={css.messageItem}>
-                No Videos, try another search term or create API KEY if you haven't.
-              </p>
-            </div>
-          )
         )}
       </div>
       <div className={css.buttonWrapper}>
-        {searchedVideos.length !== 0 ? (
+        {popularVideos.length !== 0 ? (
           <button onClick={handleButtonPress} className={css.loadBtn}>
             Load More
           </button>
