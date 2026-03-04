@@ -1,7 +1,7 @@
 import css from './Pictures.module.css';
 import { Loader } from '../InitLoader/Loader';
 import { useEffect } from 'react';
-import imagePic from './TheDogAPI.png';
+import imagePic from './TheCatAPI.png';
 import SimpleLightbox from 'simplelightbox';
 import 'simplelightbox/dist/simple-lightbox.min.css';
 import { useDispatch } from 'react-redux';
@@ -10,11 +10,11 @@ import {
   selectLoading,
   selectSearchedImgWord,
   selectSearchedImages,
-  selectPopularImages,
+  selectCatImages,
 } from '../../redux/Application/selectors';
 import {
-  saveImages,
-  fetchPopularImages,
+  saveCatImages,
+  fetchCatImages,
 } from '../../redux/Application/operations';
 
 export const Pictures = () => {
@@ -22,7 +22,7 @@ export const Pictures = () => {
   const searchedImages = useSelector(selectSearchedImages);
   const searchedImgWord = useSelector(selectSearchedImgWord);
   const ifLoading = useSelector(selectLoading);
-  const popularImages = useSelector(selectPopularImages);
+  const popularImages = useSelector(selectCatImages);
 
   const handleButtonPress = (evt) => {
     evt.target.style.boxShadow = 'inset 0 0 10px 5px rgba(0, 0, 0, 0.3)';
@@ -30,7 +30,7 @@ export const Pictures = () => {
     setTimeout(() => {
       evt.target.style.boxShadow = 'none';
     }, 2000);
-    dispatch(fetchPopularImages());
+    dispatch(fetchCatImages());
 
   }
 
@@ -43,7 +43,7 @@ export const Pictures = () => {
 
      
 
-     dispatch(saveImages({ image_files: imageFiles }));
+     dispatch(saveCatImages({ image_files: imageFiles }));
    };
 
   useEffect(() => {
@@ -70,22 +70,22 @@ export const Pictures = () => {
         <img
           src={imagePic}
           className={css.icon}
-          style={{ height: '150px' }}
+          style={{ width: '220px' }}
           alt=""
         />
 
         <span>
-          <span className={css.movieGalleryLabel}>Dog Pictures</span>
+          <span className={css.movieGalleryLabel}>Cat Pictures</span>
         </span>
 
         <img
           src={imagePic}
           className={css.iconTwo}
-          style={{ height: '150px' }}
+          style={{ width: '220px' }}
           alt=""
         />
       </span>
-
+      
       <div className={css.galleryFrame}>
         <Loader />
         {popularImages.length !== 0 && (
@@ -93,7 +93,7 @@ export const Pictures = () => {
             {popularImages.map(popularImage => (
               <li key={popularImage.id} className={css.movieItem}>
                 <a href={popularImage.url}>
-                  <img className={css.image} src={popularImage.url} alt="Dog" />
+                  <img className={css.image} src={popularImage.url} alt={popularImage.id} />
                 </a>
                 <button
                   className={css.liker}

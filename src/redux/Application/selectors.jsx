@@ -6,6 +6,8 @@ export const selectPopularVideos = state => state.app.popularVideos;
 
 export const selectPopularImages = state => state.app.popularImages;
 
+export const selectCatImages = state => state.app.catImages;
+
 export const selectSearchedVideos = state => state.app.searchedVideos;
 
 export const selectSearchedVideosNum = state => state.app.searchVidNmu;
@@ -15,6 +17,8 @@ export const selectSearchedImages = state => state.app.searchedImages;
 export const selectSavedVideos = state => state.app.savedVideos;
 
 export const selectSavedImages = state => state.app.savedImages;
+
+export const selectSavedCatImages = state => state.app.savedCatImages;
 
 export const selectSearchedVidWord = state => state.app.searchVidWord;
 

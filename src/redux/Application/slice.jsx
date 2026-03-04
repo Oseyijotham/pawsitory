@@ -2,8 +2,10 @@ import { createSlice } from '@reduxjs/toolkit';
 import {
   fetchPopularVideos,
   fetchMorePopularVideos,
+  fetchCatImages,
   fetchSavedVideos,
   fetchSavedImages,
+  fetchSavedCatImages,
   fetchVotes,
   addVote,
   searchVideos,
@@ -14,6 +16,7 @@ import {
   searchImages,
   fetchImgWord,
   deleteImages,
+  deleteCatImages,
   deleteVideos,
   searchMoreVideos,
   createKey,
@@ -43,6 +46,8 @@ const appSlice = createSlice({
     savedImages: [],
     searchVidWord: null,
     popularImages: [],
+    catImages: [],
+    savedCatImages: [],
     searchedImages: [],
     searchImgWord: null,
     ifLoading: false,
@@ -169,6 +174,19 @@ const appSlice = createSlice({
         state.error = action.payload;
       })
 
+      .addCase(fetchCatImages.pending, state => {
+        state.ifLoading = true;
+      })
+      .addCase(fetchCatImages.fulfilled, (state, action) => {
+        state.ifLoading = false;
+        state.error = null;
+        state.catImages = action.payload;
+      })
+      .addCase(fetchCatImages.rejected, (state, action) => {
+        state.ifLoading = false;
+        state.error = action.payload;
+      })
+
       .addCase(searchImages.pending, state => {
         state.ifLoading = true;
       })
@@ -224,6 +242,20 @@ const appSlice = createSlice({
         state.ifLoading = false;
         state.error = action.payload;
       })
+
+      .addCase(fetchSavedCatImages.pending, state => {
+        state.ifLoading = true;
+      })
+      .addCase(fetchSavedCatImages.fulfilled, (state, action) => {
+        state.ifLoading = false;
+        state.error = null;
+        state.savedCatImages = action.payload;
+      })
+      .addCase(fetchSavedCatImages.rejected, (state, action) => {
+        state.ifLoading = false;
+        state.error = action.payload;
+      })
+
       .addCase(deleteImages.pending, state => {
         state.ifLoading = true;
       })
@@ -239,6 +271,23 @@ const appSlice = createSlice({
         state.ifLoading = false;
         state.error = action.payload;
       })
+
+      .addCase(deleteCatImages.pending, state => {
+        state.ifLoading = true;
+      })
+      .addCase(deleteCatImages.fulfilled, (state, action) => {
+        state.ifLoading = false;
+        state.error = null;
+        const myIndex = state.savedCatImages.findIndex(
+          image => image.id === action.payload
+        );
+        state.savedCatImages.splice(myIndex, 1);
+      })
+      .addCase(deleteCatImages.rejected, (state, action) => {
+        state.ifLoading = false;
+        state.error = action.payload;
+      })
+
       .addCase(deleteVideos.pending, state => {
         state.ifLoading = true;
       })

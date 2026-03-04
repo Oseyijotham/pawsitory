@@ -7,15 +7,15 @@ import SimpleLightbox from 'simplelightbox';
 import 'simplelightbox/dist/simple-lightbox.min.css';
 import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
-import {selectSavedImages} from '../../redux/Application/selectors';
+import { selectSavedCatImages } from '../../redux/Application/selectors';
 import {
-  fetchSavedImages,
-  deleteImages,
+  fetchSavedCatImages,
+  deleteCatImages,
 } from '../../redux/Application/operations';
 
 export const PictureCollection = () => {
   const dispatch = useDispatch();
-  const savedImages = useSelector(selectSavedImages);
+  const savedImages = useSelector(selectSavedCatImages);
 
   const handlePress = evt => {
     evt.target.style.boxShadow =
@@ -25,7 +25,7 @@ export const PictureCollection = () => {
     }, 2000);
     const myId = evt.target.name;
     
-    dispatch(deleteImages(myId));
+    dispatch(deleteCatImages(myId));
   };
 
   useEffect(() => {
@@ -43,7 +43,7 @@ export const PictureCollection = () => {
   }, [savedImages]);
 
   useEffect(() => {
-    dispatch(fetchSavedImages());
+    dispatch(fetchSavedCatImages());
   }, [dispatch]);
 
   return (

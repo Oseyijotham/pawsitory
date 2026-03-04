@@ -121,7 +121,7 @@
   align-items: center;
   font-family: "Comic Sans Ms";
   font-weight: 700;
-  color: #d4af37;
+  color: blue;
 }
 
 .galleryFrame{
@@ -149,7 +149,41 @@
   margin-bottom: 20px;
 }
 
+.input {
+  width: 358px;
+  height: 50px;
+  border: 1px solid rgba(15, 15, 15, 0.3);
+  filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.15));
+  border-radius: 4px;
+  background-color: #48bdeb;
+  font-size: 16px;
+  line-height: 1.25;
+  letter-spacing: 0.03em;
+  padding-top: 15px;
+  padding-bottom: 15px;
+  padding-left: 16px;
+  font-family: 'Comic Sans MS';
+  font-weight: 700;
+  color: blue;
+}
 
+.button {
+  margin-left: 12px;
+  background-color: blue;
+  box-shadow: 0px 4px 6px -1px rgba(0, 0, 0, 0.3),
+      0px 2px 4px -1px rgba(0, 0, 0, 0.2),
+      0px 10px 12px -6px rgba(0, 0, 0, 0.4);
+  border-radius: 4px;
+  cursor: pointer;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-left: 28px;
+  padding-right: 28px;
+  border: 1px solid rgba(15, 15, 15, 0.3);
+  font-family: 'Comic Sans MS';
+  font-weight: 700;
+  color:#ffff;
+}
 
 .buttonWrapper{
   text-align: center;

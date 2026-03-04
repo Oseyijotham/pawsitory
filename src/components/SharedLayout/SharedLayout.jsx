@@ -57,14 +57,14 @@ export const SharedLayout = () => {
               <Link className={css.signLink} to="/videos">
                 Videos
               </Link>
-              <Link to="/pictures">Pictures</Link>
+              <Link to="/pictures">Dog Pictures</Link>
+              <Link to="/catPictures">Cat Pictures</Link>
               <Link to="/videoCollection">Video Collection</Link>
-              <Link to="/pictureCollection">Picture Collection</Link>
+              <Link to="/pictureCollection">Dog Pictures Collection</Link>
+              <Link to="/catPicturesCollection">Cat Pictures Collection</Link>
             </nav>
             <span className={css.navSlogan}>
-              <i>
-                "Create Your Personal Collection of quality Dog Media"
-              </i>
+              <i>"Create Your Personal Collection of quality Pet Media"</i>
             </span>
           </div>
         )}

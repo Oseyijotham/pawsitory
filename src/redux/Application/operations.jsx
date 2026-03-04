@@ -313,7 +313,7 @@ export const retrieveKey = createAsyncThunk(
 
 export const fetchPopularVideos = createAsyncThunk(
   'videos/fetchPopularVideos',
-  async (query = 'Canine', thunkAPI) => {
+  async (query = 'Pets', thunkAPI) => {
     try {
       const response = await client.videos.search({ query, per_page: 12 });
       // console.log(response.videos);
@@ -326,7 +326,7 @@ export const fetchPopularVideos = createAsyncThunk(
 
 export const fetchMorePopularVideos = createAsyncThunk(
   'videos/fetchMorePopularVideos',
-  async (query = 'Canine', thunkAPI) => {
+  async (query = 'Pets', thunkAPI) => {
     const state = thunkAPI.getState();
 
     const popularVidNmu = state.app.popularVidNmu;
@@ -494,6 +494,30 @@ export const fetchMorePopularImages = createAsyncThunk(
           headers: {
             'x-api-key':
               'live_mVNNir4rmmFjnXsK0BwEkL9zWunBd4QBbdqWnb3nql70CmvWgJCGr5zp2xeeLlRD',
+          },
+        }
+      );
+
+      const data = await response.json();
+      console.log(data);
+      return data;
+    } catch (e) {
+      return thunkAPI.rejectWithValue(e.message);
+    }
+  }
+);
+
+export const fetchCatImages = createAsyncThunk(
+  'images/fetchCatImages',
+  async (_, thunkAPI) => {
+    try {
+      const response = await fetch(
+        'https://api.thecatapi.com/v1/images/search?limit=10',
+        {
+          method: 'GET',
+          headers: {
+            'x-api-key':
+              'live_veNZdtcwPdxTq8JCOCN8dW0LvRfMhLJHM4uZOHDCWDC5ve8GaIeqqX5Y2CT6lrKI',
           },
         }
       );
@@ -757,6 +781,79 @@ export const saveImages = createAsyncThunk(
   }
 );
 
+export const saveCatImages = createAsyncThunk(
+  'images/saveCatImages',
+  async ({ image_files }, thunkAPI) => {
+    const state = thunkAPI.getState();
+    const persistedToken = state.auth.token;
+
+    if (persistedToken === null) {
+      return thunkAPI.rejectWithValue('Unable to fetch user');
+    }
+    try {
+      const res = await axios.get(
+        'https://69a6c3892cd1d055268ece6c.mockapi.io/users'
+      );
+      const clients = res.data;
+      const secretKey = 'thisisaverysecurekey1234567890';
+      //console.log(persistedToken);
+      const payObj = await verifyJWT(persistedToken, secretKey);
+      //console.log(payObj);
+      if (!payObj) {
+        alert('SESSION EXPIRED, LOGIN AGAIN');
+        window.location.reload();
+        const error = new Error(`Not Authorized`);
+        error.status = 401;
+      }
+      const myClient = clients.find(client => client.id === payObj.id);
+      if (!myClient) {
+        const error = new Error(`Not Authorized`);
+        error.status = 401;
+      }
+      const payload = await verifyJWT(myClient.apiKey, secretKey);
+
+      if (myClient.apiKey === null) {
+        alert('Go to homepage and create an API KEY to use this');
+        const error = new Error(`Not Authorized`);
+        error.status = 401;
+        throw error;
+      }
+
+      const isValidKey = await theAuthAPI.apiKeys.isValidKey(payload.apKey);
+      if (isValidKey) {
+        //console.log('The API key is valid!');
+      } else {
+        alert('Go to homepage and create an API KEY to use this');
+        //console.log('Invalid API key!');
+        const error = new Error(`Not Authorized`);
+        error.status = 401;
+        throw error;
+      }
+
+      const response = await fetch(
+        `https://69a708b02cd1d055268fad3b.mockapi.io/clientCatImages`,
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ image_files, owner: myClient.id }),
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error('Failed to post saved images');
+      }
+
+      const data = await response.json();
+
+      return data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.message);
+    }
+  }
+);
+
 export const fetchSavedImages = createAsyncThunk(
   'images/fetchImages', 
   async (_, thunkAPI) => {
@@ -806,11 +903,59 @@ export const fetchSavedImages = createAsyncThunk(
   }
 );
 
+export const fetchSavedCatImages = createAsyncThunk(
+  'images/fetchSavedCatImages',
+  async (_, thunkAPI) => {
+    const state = thunkAPI.getState();
+    const persistedToken = state.auth.token;
+
+    if (persistedToken === null) {
+      return thunkAPI.rejectWithValue('Unable to fetch user');
+    }
+    try {
+      const res = await axios.get(
+        'https://69a6c3892cd1d055268ece6c.mockapi.io/users'
+      );
+      const clients = res.data;
+      const secretKey = 'thisisaverysecurekey1234567890';
+      //console.log(persistedToken);
+      const payObj = await verifyJWT(persistedToken, secretKey);
+      //console.log(payObj);
+      if (!payObj) {
+        alert('SESSION EXPIRED, LOGIN AGAIN');
+        window.location.reload();
+        const error = new Error(`Not Authorized`);
+        error.status = 401;
+      }
+      const myClient = clients.find(client => client.id === payObj.id);
+      if (!myClient) {
+        const error = new Error(`Not Authorized`);
+        error.status = 401;
+      }
+
+      const response = await fetch(
+        `https://69a708b02cd1d055268fad3b.mockapi.io/clientCatImages`
+      );
+
+      if (!response.ok) {
+        throw new Error('Failed to fetch images');
+      }
+
+      const data = await response.json();
+      const myData = data.filter(data => data.owner === myClient.id);
+      //console.log(myData);
+      return myData;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.message);
+    }
+  }
+);
+
 
 export const deleteImages = createAsyncThunk(
   'images/deleteImage', 
   async (myId, thunkAPI) => {
-    //console.log(myId);
+    console.log(myId);
     try {
       const response = await fetch(
         `https://69a6c3892cd1d055268ece6c.mockapi.io/clientImages/${myId}`,
@@ -827,6 +972,29 @@ export const deleteImages = createAsyncThunk(
       return myId; 
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message); 
+    }
+  }
+);
+
+export const deleteCatImages = createAsyncThunk(
+  'images/deleteCatImage',
+  async (myId, thunkAPI) => {
+    //console.log(myId);
+    try {
+      const response = await fetch(
+        `https://69a708b02cd1d055268fad3b.mockapi.io/clientCatImages/${myId}`,
+        {
+          method: 'DELETE',
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error('Failed to delete image');
+      }
+
+      return myId;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.message);
     }
   }
 );

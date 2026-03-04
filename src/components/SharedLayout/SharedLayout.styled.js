@@ -76,6 +76,7 @@ export const Link = styled(NavLink)`
   background-color: #a6121f;
   border: 2px solid #fff;
   box-shadow: inset 0 0 10px 5px rgba(0, 0, 0, 0.3);
+  text-align: center;
 
   &.active {
     color: white;

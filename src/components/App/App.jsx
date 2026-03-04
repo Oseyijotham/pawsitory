@@ -13,6 +13,7 @@ import {
   fetchPopularVideos,
   fetchPopularImages,
   retrieveKey,
+  fetchCatImages,
 } from '../../redux/Application/operations';
 import { jwtVerify } from 'jose';
 
@@ -27,6 +28,10 @@ const VideoCollection = lazy(() =>
   import('../VideoCollection/VideoCollection')
 );
 const Videos = lazy(() => import('../Videos/Videos'));
+
+const CatPictures = lazy(() => import('../CatPictures/Pictures'));
+
+const CatPicturesCollection = lazy(() => import('../CatPictureCollection/PictureCollection'));
 
 export const App = () => {
   const ifRefreshing = useSelector(selectIfRefreshing);
@@ -93,6 +98,7 @@ async function verifyJWT(token, secretOrPrivateKey, algorithm = 'HS256') {
     dispatch(fetchPopularVideos());
     dispatch(fetchPopularImages());
     dispatch(retrieveKey());
+    dispatch(fetchCatImages());
   }, [dispatch]);
 
   return ifRefreshing ? (
@@ -110,7 +116,7 @@ async function verifyJWT(token, secretOrPrivateKey, algorithm = 'HS256') {
             <AuthRegisterRoute redirectTo="/" component={<Register />} />
           }
         />
-          {/*<Route path="register" element={<Register />} />*/}
+        {/*<Route path="register" element={<Register />} />*/}
         <Route
           path="Home"
           element={<SecureRoute redirectTo="/" component={<Home />} />}
@@ -131,6 +137,16 @@ async function verifyJWT(token, secretOrPrivateKey, algorithm = 'HS256') {
         <Route
           path="pictures"
           element={<SecureRoute redirectTo="/" component={<Pictures />} />}
+        />
+
+        <Route
+          path="catPictures"
+          element={<SecureRoute redirectTo="/" component={<CatPictures />} />}
+        />
+
+        <Route
+          path="catPicturesCollection"
+          element={<SecureRoute redirectTo="/" component={<CatPicturesCollection />} />}
         />
 
         <Route
